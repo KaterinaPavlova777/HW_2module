@@ -5,7 +5,7 @@ def disguised_card_or_check(user_input: str) -> str:
     """
     Функция принимает на вход номер карты или номер счета и возвращает маску.
     """
-    if user_input[0:4] == 'Счет':
+    if user_input[0:4] == "Счет":
         splitted_usercheck_list = list(user_input.split())
         check_name = []
         check_numbers = []
@@ -28,3 +28,13 @@ def disguised_card_or_check(user_input: str) -> str:
     if len(card_numbers) > 1:
         return f"{' '.join(card_name)} {card_numbers[0]} {card_numbers[1][0:2]}** **** {card_numbers[3]}"
     return f"{' '.join(card_name)} {masks.disguised_card(' '.join(card_numbers))}"
+
+
+def reformat_data(user_input: str) -> str:
+    """
+    Функция приводит принимаемую дату в более читаемый вид.
+    """
+    only_data = user_input[0:10]
+    splitted_data = only_data.split("-")
+    reversed_data = splitted_data[::-1]
+    return ".".join(reversed_data)
