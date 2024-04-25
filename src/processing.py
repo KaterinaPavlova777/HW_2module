@@ -13,13 +13,6 @@ def filter_list_by_state(input_data: List[Dict[str, str | int]], state: str) -> 
     return output_data
 
 
-# def sort_data(input_data: List[Dict[str, str | int]]) -> List[Dict[str, str | int]]:
-#     """
-#     Принимает на вход список словарей и возвращает список, в котором исходные словари отсортированы по убыванию даты.
-#     """
-#     return sorted(input_data, key=lambda x: x.get("date"), reverse=True)
-
-
 def sort_data(input_data: List) -> List:
     """
     Принимает на вход список словарей и возвращает список, в котором исходные словари отсортированы по убыванию даты.
