@@ -48,6 +48,7 @@ requests-toolbelt==1.0.0
 shellingham==1.5.4
 tomlkit==0.12.4
 trove-classifiers==2024.4.10
+types-requests==2.32.0.20240521
 typing_extensions==4.11.0
 urllib3==2.2.1
 virtualenv==20.25.1
