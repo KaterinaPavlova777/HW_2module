@@ -2,6 +2,7 @@ import json
 import logging
 from typing import Any, List
 
+import pandas as pd
 import requests
 
 from src.service import headers
@@ -60,3 +61,21 @@ def get_sum_of_transaction(transaction: dict) -> float:
     logger.info(f"sum {result}")
 
     return float(result)
+
+
+def read_from_csv_file(path: str) -> list:
+    """
+    Реализовывает считывание финансовых операций с CSV-файлов.
+    """
+    reviews = pd.read_csv(path, sep=";")
+    dict_filepath = reviews.to_dict(orient="records")
+    return dict_filepath
+
+
+def read_from_xlsx_file(path: str) -> list:
+    """
+    Реализовывает считывание финансовых операций с XLSX-файлов.
+    """
+    reviews = pd.read_excel(path)
+    dict_filepath = reviews.to_dict(orient="records")
+    return dict_filepath
