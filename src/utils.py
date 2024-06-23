@@ -1,5 +1,7 @@
 import json
 import logging
+import re
+from collections import Counter
 from typing import Any, List
 
 import pandas as pd
@@ -79,3 +81,36 @@ def read_from_xlsx_file(path: str) -> list:
     reviews = pd.read_excel(path)
     dict_filepath = reviews.to_dict(orient="records")
     return dict_filepath
+
+
+def find_transaction(transactions: list, search_string: str) -> list:
+    """
+    Функция, которая принимает список словарей с данными о банковских операциях и строку поиска
+    и возвращает список словарей, у которых в описании есть данная строка.
+    """
+    final_list = []
+
+    pattern = re.compile(search_string, re.IGNORECASE)
+
+    for transaction in transactions:
+        if pattern.search(transaction["description"]):
+            final_list.append(transaction)
+
+    return final_list
+
+
+def get_category_dict(transactions: list, categories: dict) -> dict:
+    """
+    Функция, которая принимает список словарей с данными о банковских операциях и словарь категорий операций
+    и возвращает словарь, в котором ключи — это названия категорий,
+    а значения — это количество операций в каждой категории.
+    """
+    first_pattern = re.compile("Перевод организации", re.IGNORECASE)
+    second_pattern = re.compile("Перевод со счета на счет", re.IGNORECASE)
+    third_pattern = re.compile("Перевод с карты на карту", re.IGNORECASE)
+    count = Counter(transaction["description"] for transaction in transactions)
+    categories["Перевод организации"] += count[first_pattern.pattern]
+    categories["Перевод со счета на счет"] += count[second_pattern.pattern]
+    categories["Перевод с карты на карту"] += count[third_pattern.pattern]
+
+    return categories

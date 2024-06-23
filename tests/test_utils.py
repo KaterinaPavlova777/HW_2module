@@ -4,7 +4,7 @@ from unittest.mock import Mock, patch
 
 from pandas import DataFrame
 
-from src.utils import get_transactions_data, read_from_xlsx_file, read_from_csv_file
+from src.utils import get_transactions_data, read_from_csv_file, read_from_xlsx_file
 
 
 @patch("builtins.open", create=True)
